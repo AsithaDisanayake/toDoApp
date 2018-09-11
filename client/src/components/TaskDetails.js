@@ -10,36 +10,27 @@ class TaskDetails extends Component {
   constructor() {
     super();
     this.state = {
-      task: {},
+      task: {}
      
     };
   }
 
   componentDidMount() {
+    console.log(this.props.match.params.id)
     this.props.taskDetails(this.props.match.params.id);
     
   }
   
-  // componentWillReceiveProps(nextprops){
+  componentWillReceiveProps(nextprops){
+
+    if (nextprops.task){
+      this.setState({task:nextprops.this.props.taskDetails(this.props.match.params.id)})
+    }
     
-  // }
+  }
 
   render() {
-    //  const { task } = this.props.task;
-    // let postContent;
-
-    // if (post === null || loading || Object.keys(post).length === 0) {
-    //   postContent = <Spinner />;
-    // } else {
-    //   postContent = (
-    //     <div>
-    //       <PostItem post={post} showActions={false} />
-    //       <CommentForm postId={post._id} />
-    //       <CommentFeed postId={post._id} comments={post.comments} />
-    //     </div>
-    //   );
-    // }
-
+ 
     return (
       <div className="post">
         <div className="container">

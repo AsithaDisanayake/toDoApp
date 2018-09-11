@@ -3,6 +3,8 @@ import axios from 'axios';
 const GET_TASKS = 'GET_TASKS';
 const GET_TASK = 'GET_TASK';
 const LOADING = 'LOADING';
+const COMPLETE_TASK = 'COMPLETE_TASK';
+
 // const ADD_TASK = 'ADD_TASK';
 
 
@@ -46,6 +48,20 @@ export const taskDetails = id => dispatch => {
     )
    
 };
+
+export const completeTask = id => dispatch => {
+  dispatch(setPostLoading());
+  axios
+    .get(`/api/task/completeTask/${id}`)
+    .then(res =>
+      dispatch({
+        type: COMPLETE_TASK,
+        payload: res.data
+      })
+    )
+   
+};
+
 
 export const setPostLoading = () => {
   return {

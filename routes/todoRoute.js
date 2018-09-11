@@ -41,23 +41,61 @@ router.get(
 
 // @route   POST api/completeTask
 // @desc    complete task
+// router.get(
+//   '/completeTask/:id',
+  
+//   (req, res) => {
+
+//       console.log( req.params.id);
+    
+//         Task.findOneAndUpdate(
+//           { _id: req.params.id },
+//           { $set :{status: "true"} },
+//           { new: true }
+          
+//         ).then(tasks => res.json(tasks))
+   
+ 
+//   }
+// );
+
+// @route   POST api/completeTask
+// @desc    complete task
 router.get(
   '/completeTask/:id',
-  
+ 
   (req, res) => {
+   
+    Task.findOne({ _id: req.params.id }).then(task => {
+      console.log( task);
+      if (task.status === "true") {
+        // Update
+        Task.findOneAndUpdate(
+          { _id: req.params.id },
+          { $set :{status: "false"} },
+          { new: true }
+          
+        ).then(tasks => res.json(tasks))
 
-      console.log( req.params.id);
-    
+
+      } else {
+
         Task.findOneAndUpdate(
           { _id: req.params.id },
           { $set :{status: "true"} },
           { new: true }
           
         ).then(tasks => res.json(tasks))
-   
- 
+      
+      }
+    });
   }
 );
+
+
+
+
+
 
 // @route   GET api/tasks/:id
 // @desc    Get post by id
