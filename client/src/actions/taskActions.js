@@ -19,8 +19,8 @@ export const addTask = (postData, history) => dispatch => {
     
 };
 
-// Update task
-export const updateTask = (postData, id, history) => dispatch => {
+// Edit task
+export const editTask = (postData, id, history) => dispatch => {
   
   axios
     .post(`/api/task/updateTask/${id}`, postData)

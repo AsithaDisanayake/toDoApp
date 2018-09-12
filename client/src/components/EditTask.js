@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { addTask } from '../actions/taskActions';
+import { editTask } from '../actions/taskActions';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-class AddTask extends Component {
+class EditTask extends Component {
 
   constructor() {
     super();
@@ -36,7 +36,7 @@ class AddTask extends Component {
 
     };
 
-    this.props.addTask(newTask, this.props.history);
+    this.props.editTask(newTask, this.props.history);
 
 console.log(newTask);
 
@@ -81,8 +81,8 @@ console.log(newTask);
   }
 }
 
-AddTask.propTypes = {
-  addTask: PropTypes.func.isRequired,
+EditTask.propTypes = {
+  editTask: PropTypes.func.isRequired,
   // tasks: PropTypes.object.isRequired
 }
 
@@ -90,4 +90,4 @@ const mapStateToProps = (state) => ({
   // tasks : state.tasks
 });
 
-export default connect(mapStateToProps, { addTask })(withRouter(AddTask));
+export default connect(mapStateToProps, { editTask })(withRouter(EditTask));

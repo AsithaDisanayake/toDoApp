@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Landing from './Landing';
+import Loading from './Loading';
 import { withRouter } from 'react-router-dom';
 
 import { getDetails } from '../actions/taskActions';
@@ -28,7 +28,7 @@ class TaskDetails extends Component {
     let taskContent;
 
     if (this.props.task === null) {
-      taskContent = <Landing />;
+      taskContent = <Loading />;
     } else {
     
 
@@ -68,7 +68,7 @@ class TaskDetails extends Component {
 
                     <tr>
                     <td>Status</td>
-                    <td>{this.props.task.status === "true" ? (<kbd>Completed</kbd>) : (<kbd>Not Completed</kbd>)}</td>
+                    <td>{this.props.task.status === "true" ? (<kbd>Completed</kbd>) : (<kbd>Incomplete</kbd>)}</td>
                   </tr>
 
                 </tbody>

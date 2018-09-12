@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { viewTask } from '../actions/taskActions'
 
 import { PropTypes } from 'prop-types';
-import Landing from './Landing';
+import Loading from './Loading';
 
 
 
@@ -27,7 +27,7 @@ class ViewTask extends Component {
     let taskContent;
 
     if (tasks === null) {
-      taskContent = <Landing/>;
+      taskContent = <Loading/>;
     } else {
       taskContent = <TaskFeed tasks={tasks} />;
     }

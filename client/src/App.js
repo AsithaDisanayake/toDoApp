@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AddTask from './components/AddTask';
 import ViewTask from './components/ViewTask';
 import TaskDetails from './components/TaskDetails';
+import EditTask from './components/EditTask';
 // import Landing from './components/Landing';
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
           <div className="App">
             <br /> <br />
             {/* < Route exact path="/" component = {Landing} /> */}
-            <div className="container-fluid jumbotron col-md-5">
+            <div className="container-fluid jumbotron col-md-4">
               
               <div className="panel panel">
                 <div className="panel-heading-info">
@@ -26,6 +27,7 @@ class App extends Component {
                 <div className="panel-body">
                 < Route exact path="/" component = {ViewTask} />
                 <Route exact path="/taskdetails/:id" component={TaskDetails}/>
+                <Route exact path="/edittask" component={EditTask}/>
                 </div>
               </div>
 
