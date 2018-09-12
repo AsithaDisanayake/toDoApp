@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import { completeTask } from '../actions/taskActions';
 
 import { PropTypes } from 'prop-types';
-// import classnames from 'classnames';
+
 
 class TaskList extends Component {
 
 
     onCompleteClick(id) {
 
-
-        axios
-            .get('/api/task/completeTask/' + id)
-            .then(res => this.props.history.push("/"))
-        // .catch(err => this.setState({ errors: err.response.data }));
+        this.props.completeTask(id,this.props.history);
+        window.location.reload();
 
     }
 
@@ -71,9 +68,13 @@ class TaskList extends Component {
 
 
 TaskList.propTypes = {
-
-    task: PropTypes.object.isRequired,
+    
+    completeTask:PropTypes.func.isRequired,
+    task: PropTypes.object.isRequired
 
 };
 
-export default (withRouter(TaskList));
+
+
+
+export default connect(null, { completeTask })(withRouter(TaskList));

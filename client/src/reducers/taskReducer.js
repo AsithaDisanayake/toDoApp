@@ -12,7 +12,7 @@ const initialState = {
 
   tasks: null,
   task: null,
-  loading: false
+  loading: true
 
 };
 
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
     case LOADING:
       return {
         ...state,
-        loading: true
+        loading: false
       };
 
     case GET_TASKS:
