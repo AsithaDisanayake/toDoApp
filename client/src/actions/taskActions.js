@@ -20,10 +20,10 @@ export const addTask = (postData, history) => dispatch => {
 };
 
 // Edit task
-export const editTask = (postData, id, history) => dispatch => {
+export const editTask = (postData, history) => dispatch => {
   
   axios
-    .post(`/api/task/updateTask/${id}`, postData)
+    .post(`/api/task/editTask`, postData)
     .then(res =>
       history.push('/')
     )

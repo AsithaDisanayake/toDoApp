@@ -7,7 +7,7 @@ import AddTask from './components/AddTask';
 import ViewTask from './components/ViewTask';
 import TaskDetails from './components/TaskDetails';
 import EditTask from './components/EditTask';
-// import Landing from './components/Landing';
+
 
 class App extends Component {
   render() {
@@ -27,7 +27,7 @@ class App extends Component {
                 <div className="panel-body">
                 < Route exact path="/" component = {ViewTask} />
                 <Route exact path="/taskdetails/:id" component={TaskDetails}/>
-                <Route exact path="/edittask" component={EditTask}/>
+                <Route exact path="/edittask/:id" component={EditTask}/>
                 </div>
               </div>
 

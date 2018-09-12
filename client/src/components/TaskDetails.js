@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { withRouter } from 'react-router-dom';
 
+
 import { getDetails } from '../actions/taskActions';
 import { deleteTask } from '../actions/taskActions';
 
@@ -75,9 +76,12 @@ class TaskDetails extends Component {
 
               </table>
               <div className="btn-group float-left">
-                <button type="button" className="btn btn-success">edit</button>
+              <Link to={{pathname: `/edittask/${this.props.task._id}`, state: { task: this.props.task }}} className="btn btn-success">
+                        Edit
+                        </Link>
+                {/* <button type="button" className="btn btn-success">edit</button> */}
                 <button onClick={this.onDeleteClick.bind(this, this.props.task._id)} type="button" className="btn btn-danger">delete</button>
-
+                
               </div>
             </div>
           </div>

@@ -42,12 +42,13 @@ router.get(
 // @route   POST api/completeTask
 // @desc    complete task
 router.post(
-  '/editTask/:id',
+  '/editTask',
 
   (req, res) => {
 
-    console.log(req.params.id);
+   // console.log(req.params.id);
     const taskFields = {};
+    if (req.body._id) taskFields._id = req.body._id;
     if (req.body.name) taskFields.name = req.body.name;
     if (req.body.description) taskFields.description = req.body.description;
     if (req.body.startdate) taskFields.startdate = req.body.startdate;
@@ -55,7 +56,7 @@ router.post(
 
 
     Task.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: req.body._id },
       { $set: taskFields },
       { new: true }
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { editTask } from '../actions/taskActions';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
+// import { getDetails } from '../actions/taskActions';
 
 class EditTask extends Component {
 
@@ -21,6 +22,16 @@ class EditTask extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount(){        
+
+      this.setState({name:this.props.location.state.task.name});
+      this.setState({description:this.props.location.state.task.description});
+      this.setState({startdate:this.props.location.state.task.startdate});
+      this.setState({enddate:this.props.location.state.task.enddate});
+      
+
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
 
@@ -28,7 +39,8 @@ class EditTask extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const newTask = {
+    const updateTask = {
+      id_ : this.props.location.state.task._id,
       name: this.state.name,
       description: this.state.description,
       startdate: this.state.startdate,
@@ -36,9 +48,9 @@ class EditTask extends Component {
 
     };
 
-    this.props.editTask(newTask, this.props.history);
+    this.props.editTask(updateTask, this.props.history);
 
-console.log(newTask);
+console.log(updateTask);
 
   }
 
@@ -51,7 +63,7 @@ console.log(newTask);
 
         <br />
 
-
+        EditTask
 
         <form onSubmit={this.onSubmit}>
           <div className="form-group" >
@@ -83,11 +95,9 @@ console.log(newTask);
 
 EditTask.propTypes = {
   editTask: PropTypes.func.isRequired,
-  // tasks: PropTypes.object.isRequired
+
 }
 
-const mapStateToProps = (state) => ({
-  // tasks : state.tasks
-});
 
-export default connect(mapStateToProps, { editTask })(withRouter(EditTask));
+
+export default connect(null, { editTask })(withRouter(EditTask));

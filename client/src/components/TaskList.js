@@ -38,11 +38,11 @@ class TaskList extends Component {
                 </td>
 
                 <td >
-                    <div className="float-right">                       
+                    <span className="float-right">                       
                         <Link to={`/taskdetails/${task._id}`} className="btn btn-info mr-1">
                         <i className="fas fa-eye" />
                         </Link>
-                    </div>  
+                    </span>  
 
                 </td>
 
