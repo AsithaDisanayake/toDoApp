@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Landing from './Landing';
+import { withRouter } from 'react-router-dom';
 
 import { getDetails } from '../actions/taskActions';
+import { deleteTask } from '../actions/taskActions';
 
 class TaskDetails extends Component {
 
@@ -15,6 +17,9 @@ class TaskDetails extends Component {
 
   }
 
+  onDeleteClick(id){
+    this.props.deleteTask(id,this.props.history);
+  }
 
 
   render() {
@@ -25,8 +30,8 @@ class TaskDetails extends Component {
     if (this.props.task === null) {
       taskContent = <Landing />;
     } else {
-
     
+
       taskContent = (
         <div>
           <div className="panel panel-primary">
@@ -37,42 +42,50 @@ class TaskDetails extends Component {
                   <tr>
                     <th>Title</th>
                     <th>Description</th>
-                  
+
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Name</td>
                     <td>{this.props.task.name}</td>
-               
+
                   </tr>
                   <tr>
                     <td>Details</td>
                     <td>{this.props.task.description}</td>
-                    
+
                   </tr>
                   <tr>
                     <td>Start Date</td>
                     <td>{this.props.task.startdate}</td>
-                    
+
                   </tr>
                   <tr>
                     <td>EndDate</td>
-                    <td>{this.props.task.enddate}</td>                    
+                    <td>{this.props.task.enddate}</td>
                   </tr>
-                 
+
+                    <tr>
+                    <td>Status</td>
+                    <td>{this.props.task.status === "true" ? (<kbd>Completed</kbd>) : (<kbd>Not Completed</kbd>)}</td>
+                  </tr>
+
                 </tbody>
+
               </table>
+              <div className="btn-group float-left">
+                <button type="button" className="btn btn-success">edit</button>
+                <button onClick={this.onDeleteClick.bind(this, this.props.task._id)} type="button" className="btn btn-danger">delete</button>
+
+              </div>
             </div>
           </div>
 
         </div>
       );
 
-
     }
-
-
 
     return (
       <div className="post">
@@ -82,12 +95,12 @@ class TaskDetails extends Component {
 
               {taskContent}
 
-              <Link to="/" className="btn btn-light mb-3">
-                Back
-              </Link>
             </div>
           </div>
         </div>
+        <Link to="/" className="btn btn-primary mb-3 float-right">
+          Back
+        </Link>
       </div>
 
     );
@@ -96,6 +109,7 @@ class TaskDetails extends Component {
 
 TaskDetails.propTypes = {
   getDetails: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired
   // task: PropTypes.object.isRequired
 };
 
@@ -104,4 +118,4 @@ const mapStateToProps = state => ({
   task: state.tasks.task
 });
 
-export default connect(mapStateToProps, { getDetails })(TaskDetails);
+export default connect(mapStateToProps, { getDetails, deleteTask })(withRouter(TaskDetails));

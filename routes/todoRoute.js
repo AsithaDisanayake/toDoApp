@@ -13,68 +13,73 @@ router.get('/test', (req, res) => res.json({ msg: 'Works' }));
 // @route   GET api/addTask
 // @desc    addTask
 router.post(
-    '/addTask',
+  '/addTask',
 
-    (req, res) => { 
-        const newTask = new Task({
-        name: req.body.name,  
-        description: req.body.description, 
-        startdate: req.body.startdate, 
-        enddate: req.body.enddate, 
-        });
-        console.log(newTask);
-      newTask.save().then(post => res.json(post));
-    }
-  );
+  (req, res) => {
+    const newTask = new Task({
+      name: req.body.name,
+      description: req.body.description,
+      startdate: req.body.startdate,
+      enddate: req.body.enddate,
+    });
+    console.log(newTask);
+    newTask.save().then(post => res.json(post));
+  }
+);
 
 // @route   GET api/viewTask
 // @desc    addTask
 router.get(
   '/viewTask',
 
-  (req, res) => { 
-    Task.find()    
-    .then(tasks => res.json(tasks))
-    .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+  (req, res) => {
+    Task.find()
+      .then(tasks => res.json(tasks))
+      .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
   }
 );
 
 // @route   POST api/completeTask
 // @desc    complete task
-// router.get(
-//   '/completeTask/:id',
-  
-//   (req, res) => {
+router.post(
+  '/editTask/:id',
 
-//       console.log( req.params.id);
-    
-//         Task.findOneAndUpdate(
-//           { _id: req.params.id },
-//           { $set :{status: "true"} },
-//           { new: true }
-          
-//         ).then(tasks => res.json(tasks))
-   
- 
-//   }
-// );
+  (req, res) => {
+
+    console.log(req.params.id);
+    const taskFields = {};
+    if (req.body.name) taskFields.name = req.body.name;
+    if (req.body.description) taskFields.description = req.body.description;
+    if (req.body.startdate) taskFields.startdate = req.body.startdate;
+    if (req.body.enddate) taskFields.enddate = req.body.enddate;
+
+
+    Task.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: taskFields },
+      { new: true }
+
+    ).then(tasks => res.json(tasks))
+
+  }
+);
 
 // @route   POST api/completeTask
 // @desc    complete task
 router.get(
   '/completeTask/:id',
- 
+
   (req, res) => {
-   
+
     Task.findOne({ _id: req.params.id }).then(task => {
-      console.log( task);
+      console.log(task);
       if (task.status === "true") {
         // Update
         Task.findOneAndUpdate(
           { _id: req.params.id },
-          { $set :{status: "false"} },
+          { $set: { status: "false" } },
           { new: true }
-          
+
         ).then(tasks => res.json(tasks))
 
 
@@ -82,11 +87,11 @@ router.get(
 
         Task.findOneAndUpdate(
           { _id: req.params.id },
-          { $set :{status: "true"} },
+          { $set: { status: "true" } },
           { new: true }
-          
+
         ).then(tasks => res.json(tasks))
-      
+
       }
     });
   }
@@ -94,12 +99,8 @@ router.get(
 
 
 
-
-
-
 // @route   GET api/tasks/:id
 // @desc    Get post by id
-// @access  Public
 router.get('/viewTask/:id', (req, res) => {
   Task.findById(req.params.id)
     .then(task => res.json(task))
@@ -109,4 +110,22 @@ router.get('/viewTask/:id', (req, res) => {
 });
 
 
-  module.exports = router; 
+// @route   DELETE api/tasks/:id
+// @desc    Delete task
+router.delete(
+  '/deleteTask/:id',
+
+  (req, res) => {
+
+    Task.findById(req.params.id)
+      .then(task => {
+
+        task.remove().then(() => res.json({ success: true }));
+      })
+      .catch(err => res.status(404).json({ tasknotfound: 'No task found' }));
+
+  }
+);
+
+
+module.exports = router; 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -17,17 +17,6 @@ class TaskList extends Component {
         window.location.reload();
 
     }
-
-    onViewClick(id) {
-
-
-        axios
-            .get('/api/task/viewById/' + id)
-            .then(res => this.props.history.push("/"))
-        // .catch(err => this.setState({ errors: err.response.data }));
-
-    }
-
 
     render() {
 
@@ -49,10 +38,7 @@ class TaskList extends Component {
                 </td>
 
                 <td >
-                    <div className="float-right">
-                        {/* <button className = ""> <i className="fas fa-trash-alt" /></button ><span> </span>  */}
-                        {/* <button onClick={this.onViewClick.bind(this, task._id)} className = "" >  <i className="fas fa-eye" /></button ><span> </span>   */}
-                        {/* <button className = ""> <i className="fas fa-edit" />  </button > */}
+                    <div className="float-right">                       
                         <Link to={`/taskdetails/${task._id}`} className="btn btn-info mr-1">
                         <i className="fas fa-eye" />
                         </Link>
