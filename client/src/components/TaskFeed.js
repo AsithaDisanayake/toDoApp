@@ -4,13 +4,22 @@ import TaskList from './TaskList';
 
 class TaskFeed extends Component {
 
-   
-    
+
+
 
   render() {
     const { tasks } = this.props;
-  
-     return tasks.map(task => <TaskList key={task._id} task={task} />);
+
+    if (tasks === null) {
+
+      return (
+       <p>No Task to Display...</p>
+    );
+
+    } else {
+
+      return tasks.map(task => <TaskList key={task._id} task={task} />);
+    }
   }
 }
 

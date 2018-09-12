@@ -29,10 +29,10 @@ class TaskDetails extends Component {
     
       taskContent = (
         <div>
-          <div className="panel panel-default">
+          <div className="panel panel-primary">
             <div className="panel-heading">Task Details</div>
             <div className="panel-body">
-              <table class="table table-hover">
+              <table className="table table-hover">
                 <thead>
                   <tr>
                     <th>Title</th>
@@ -53,12 +53,12 @@ class TaskDetails extends Component {
                   </tr>
                   <tr>
                     <td>Start Date</td>
-                    <td>{this.props.startdate}</td>
+                    <td>{this.props.task.startdate}</td>
                     
                   </tr>
                   <tr>
                     <td>EndDate</td>
-                    <td>{this.props.enddate}</td>                    
+                    <td>{this.props.task.enddate}</td>                    
                   </tr>
                  
                 </tbody>
