@@ -11,6 +11,7 @@ class EditTask extends Component {
   constructor() {
     super();
     this.state = {
+      _id : '',
       name: '',
       description: '',
       startdate: '',
@@ -23,7 +24,7 @@ class EditTask extends Component {
   }
 
   componentDidMount(){        
-
+    this.setState({_id:this.props.location.state.task._id});
       this.setState({name:this.props.location.state.task.name});
       this.setState({description:this.props.location.state.task.description});
       this.setState({startdate:this.props.location.state.task.startdate});
@@ -40,7 +41,7 @@ class EditTask extends Component {
     e.preventDefault();
 
     const updateTask = {
-      id_ : this.props.location.state.task._id,
+      id_ : this.state._id,
       name: this.state.name,
       description: this.state.description,
       startdate: this.state.startdate,
@@ -50,7 +51,7 @@ class EditTask extends Component {
 
     this.props.editTask(updateTask, this.props.history);
 
-console.log(updateTask);
+
 
   }
 
